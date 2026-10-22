@@ -1,0 +1,122 @@
+{
+ "id": "20261022-76",
+ "date": "2026-10-22",
+ "tag": "",
+ "theme": "violet",
+ "seed": 76,
+ "title": [
+  "AI主动干活",
+  "Claude替你上班"
+ ],
+ "accent": [
+  "主动",
+  "Claude",
+  "工作流",
+  "候补"
+ ],
+ "music": {
+  "mood": "epic",
+  "key": "A",
+  "seed": 76
+ },
+ "voice": {
+  "enabled": true,
+  "voice": "matrix_female"
+ },
+ "segments": [
+  {
+   "vo": "AI主动干活，Claude替你上班",
+   "shots": [
+    {
+     "type": "hook",
+     "plate": "hero",
+     "kb": "right"
+    }
+   ]
+  },
+  {
+   "vo": "Anthropic 开启 Claude Duet 研究预览：一款独立应用，让 Claude 以主动式智能体的方式工作，已登陆 iOS、Android 和 claude.ai，面向美国 Pro 和 Max 用户开放候补名单。",
+   "say": "Anthropic 开启 Claude Duet 研究预览：一款独立应用，让 Claude 以主动式智能体的方式工作，已登陆 iOS、Android 和 Claude 点 AI，面向美国 Pro 和 Max 用户开放候补名单。",
+   "shots": [
+    {
+     "type": "points",
+     "items": [
+      "iOS / Android / claude.ai",
+      "美国 Pro / Max 候补",
+      "研究预览 · 预览期不加价"
+     ]
+    },
+    {
+     "type": "number",
+     "value": 6000,
+     "suffix": "+",
+     "label": "Marketplace 连接器",
+     "sub": "Stripe、Shopify、DocuSign 等"
+    },
+    {
+     "type": "plate",
+     "plate": "benchmark",
+     "kb": "in",
+     "label": "研究预览 · 主动式智能体"
+    }
+   ]
+  },
+  {
+   "vo": "关键词是“主动”：不再是等你提问的聊天框，而是自己规划、自己干活的数字员工。",
+   "shots": [
+    {
+     "type": "timeline",
+     "items": [
+      {
+       "date": "早晨",
+       "text": "主动发来每日简报"
+      },
+      {
+       "date": "每几小时",
+       "text": "巡检已连接账户"
+      },
+      {
+       "date": "设备关机",
+       "text": "后台虚拟机继续执行"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "vo": "反常识的是：巨头拼的不是谁的模型更会答题，而是谁先让 AI 主动接管你的日常工作流。",
+   "shots": [
+    {
+     "type": "compare",
+     "left": {
+      "title": "聊天框",
+      "value": "等你提问",
+      "sub": "被动回答"
+     },
+     "right": {
+      "title": "数字员工",
+      "value": "自己规划",
+      "sub": "自己干活"
+     },
+     "vs": "→",
+     "label": "产品形态变了"
+    }
+   ]
+  },
+  {
+   "vo": "",
+   "caption": false,
+   "shots": [
+    {
+     "type": "outro",
+     "lines": [
+      "不再是聊天框",
+      "而是主动干活的数字员工"
+     ]
+    }
+   ],
+   "min": 3
+  }
+ ],
+ "tail": 0.8
+}

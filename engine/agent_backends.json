@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "max_attempts_per_backend": 1,
+  "backends": [
+    {
+      "id": "agy",
+      "command": "agy",
+      "model": "gemini-3.8-flash-high",
+      "effort": "high",
+      "timeout_seconds": 7200
+    },
+    {
+      "id": "codex",
+      "command": "codex",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "timeout_seconds": 7200
+    },
+    {
+      "id": "claude",
+      "command": "claude",
+      "model": "deepseek-flash[1m]",
+      "effort": "high",
+      "timeout_seconds": 7200
+    }
+  ]
+}

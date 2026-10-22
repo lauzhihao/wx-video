@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>cover</title>
+<link rel="stylesheet" href="./src/style.css">
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js"}}</script>
+<style>
+  #c { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #c img { position: absolute; left: 50%; top: 58%; width: 1180px; transform: translate(-50%, -50%); filter: saturate(1.05) brightness(0.92); }
+  #c .fade { position: absolute; left: 0; top: 0; width: 1080px; height: 1200px; background: linear-gradient(180deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 55%, rgba(0,0,0,0) 100%); }
+  #c .glow { position: absolute; left: -200px; top: 380px; width: 1480px; height: 640px; background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%); }
+  .ln { position: absolute; left: 0; width: 1080px; text-align: center; white-space: nowrap; font-family: "NSC"; font-weight: 900; }
+  .tag { position: absolute; top: 330px; left: 50%; transform: translateX(-50%); font: 600 34px "JBM"; color: var(--accent2); letter-spacing: 0.2em; }
+</style></head><body>
+<div id="c"><img id="img"><div class="glow"></div><div class="fade"></div><div class="tag" id="tag"></div><div id="lines"></div></div>
+<script type="module">
+import { theme, applyCss } from './src/core/theme.js';
+import { accentSegs, lineUnits } from './src/shots/type.js';
+const run = new URLSearchParams(location.search).get('run');
+const spec = await (await fetch(`./${run}/spec.json`)).json();
+applyCss(theme(spec.theme));
+document.getElementById('img').src = `./${run}/plates/${spec.coverPlate || 'hero'}.png`;
+document.getElementById('tag').textContent = [spec.date ? spec.date.replace(/-/g, '.') : '', (spec.tag || '').replace(/大佬|钱|反差/g, '').trim()].filter(Boolean).join('  ·  ');
+const box = document.getElementById('lines');
+let y = 420;
+(spec.title || []).forEach((ln, i) => {
+  const size = Math.min(i === 0 ? 190 : 170, Math.floor(930 / Math.max(1, lineUnits(ln))));
+  const d = document.createElement('div'); d.className = 'ln sh' + (i === 1 ? ' glow' : '');
+  Object.assign(d.style, { top: y + 'px', fontSize: size + 'px', color: i === 1 ? 'var(--accent)' : 'var(--ink)' });
+  d.innerHTML = accentSegs(ln, spec.accent).map((s) => s.cls ? `<span class="acc">${s.text}</span>` : s.text).join('');
+  box.appendChild(d); y += size * 1.2;
+});
+await document.fonts.ready; await document.getElementById('img').decode();
+window.coverReady = true;
+</script>
+</body></html>

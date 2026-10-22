@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "source": "file",
+  "title": "Your own track",
+  "path": "audio/bgm/<your-track>.m4a",
+  "start_seconds": 0,
+  "gain_db": -20,
+  "voice_over_music_lu": 18,
+  "preset": "music-forward-12db",
+  "post_duck_boost_db": 12
+}

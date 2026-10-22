@@ -1,0 +1,28 @@
+@font-face { font-family: "NSC"; src: url("../fonts/NotoSansSC-VF.ttf") format("truetype"); font-weight: 100 900; }
+@font-face { font-family: "INTER"; src: url("../fonts/Inter-VF.ttf") format("truetype"); font-weight: 100 900; }
+@font-face { font-family: "JBM"; src: url("../fonts/JetBrainsMono-VF.ttf") format("truetype"); font-weight: 100 800; }
+:root { --accent: #3ab7ff; --accent2: #7cf0d6; --warm: #ffc56b; --ink: #f3f6fb; --dim: #9aa6b8; --panel: rgba(12, 22, 38, 0.72); --line: rgba(160, 200, 255, 0.28); }
+html, body { margin: 0; background: #000; overflow: hidden; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#gl { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+#overlay { position: absolute; inset: 0; pointer-events: none; color: var(--ink); -webkit-font-smoothing: antialiased; font-kerning: normal; }
+.t { position: absolute; left: 0; top: 0; white-space: nowrap; transform-origin: 50% 50%; text-rendering: geometricPrecision; }
+.t .c { display: inline-block; will-change: transform, opacity, filter; }
+.sh { text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75), 0 0 2px rgba(0, 0, 0, 0.5); }
+.acc { color: var(--accent); }
+.acc2 { color: var(--accent2); }
+.warm { color: var(--warm); }
+.dim { color: var(--dim); }
+.glow { text-shadow: 0 0 26px color-mix(in srgb, var(--accent) 55%, transparent), 0 4px 24px rgba(0, 0, 0, 0.8); }
+.num { font-variant-numeric: tabular-nums; }
+.chip { border: 2px solid color-mix(in srgb, var(--accent) 70%, transparent); color: var(--ink); padding: 4px 18px 7px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 16%, rgba(0,0,0,0.45)); }
+.scrim { position: absolute; left: 0; width: 1080px; }
+.card { position: absolute; box-sizing: border-box; border: 1.5px solid var(--line); border-radius: 22px; background: var(--panel); backdrop-filter: blur(6px); box-shadow: 0 18px 60px rgba(0,0,0,0.45); font-family: "NSC", sans-serif; color: var(--ink); }
+.card .k { font: 600 34px "NSC"; color: var(--dim); letter-spacing: 0.04em; }
+.card .v { font: 900 92px "INTER", "NSC"; letter-spacing: -0.01em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.card .s { font: 500 32px "NSC"; color: var(--dim); line-height: 1.35; white-space: normal; }
+.tl-date { font: 700 32px "JBM", monospace; color: var(--accent); letter-spacing: 0.04em; }
+.tl-text { font: 600 42px "NSC"; color: var(--ink); line-height: 1.35; white-space: normal; }
+.pt-num { font: 800 44px "INTER"; color: var(--accent); }
+.pt-text { font: 700 46px "NSC"; color: var(--ink); line-height: 1.35; white-space: normal; }
+.quote { font: 700 58px "NSC"; line-height: 1.45; color: var(--ink); white-space: normal; text-align: center; }
