@@ -4,11 +4,13 @@
 const RUN = "__RUN__", PUBLISH = "__PUBLISH__" === "1", AT = "__AT__", DATE = "__DATE__";   // AT: "HH:MM", or empty = publish now; DATE: "YYYY-MM-DD" (same month as today), or empty = today
 const fs = await import("node:fs/promises");
 const t = JSON.parse(await fs.readFile(`${RUN}/topic.json`, "utf8"));
+const spec = JSON.parse(await fs.readFile(`${RUN}/spec.json`, "utf8"));
 const desc = `${t.intro}\n${t.tags.join(" ")}`;   // copy verbatim; tags become topics
 // 短标题 rejects commas etc. (allowed: 《》“”：+？%°), so join the two title lines with a space
 // 短标题上限 16 字，且符号只许 《》“”：+？%°（逗号用空格代替；小数点等其他符号整条报错）
 // 候选：两行加空格 → 去空格 → 第一行 → 第二行，取第一个合规的；都不合规就删掉非法符号后截断第一行
-const lines = t.title.map((s) => s.replace(/[，。,！!、；;]+$/u, "").replace(/[，,、；;]/gu, " "));
+// a run may override the on-screen title in spec.json (the Issue title often breaks 短标题's rules)
+const lines = (spec.title ?? t.title).map((s) => s.replace(/[，。,！!、；;]+$/u, "").replace(/[，,、；;]/gu, " "));
 const legal = (s) => [...s].length <= 16 && /^[\p{Script=Han}A-Za-z0-9 《》“”：+？%°]+$/u.test(s);
 const short = [lines.join(" "), lines.join(""), lines[0], lines[1]].find(legal)
   ?? [...lines[0].replace(/[^\p{Script=Han}A-Za-z0-9 《》“”：+？%°]/gu, "")].slice(0, 16).join("");

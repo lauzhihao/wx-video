@@ -64,7 +64,7 @@ runs/                   生产目录，不进 git（只保留 ledger.json）
 | 配音 | IndexTTS2 HTTP 服务（`/v1/audio/speech`，默认 7861 端口） | 是 |
 | 混音/编码 | `ffmpeg`、Python 3 + numpy/scipy/soundfile | 是 |
 | 渲染 | Node 18+、Google Chrome、`npm install` 在 `engine/web` | 是 |
-| 回听 | 能输出词级时间戳的 Whisper 包装命令 | 否 |
+| 回听 | 能输出词级时间戳的 Whisper 包装命令 + `opencc-python-reimplemented`（繁简归一） | 否 |
 | 发布 | Ego Lite（`ego-browser`）+ 已登录的视频号助手 | 否，可手动发 |
 
 渲染机不是必需的：`WX_SSH_HOST` 留空就在本机渲。有 GPU 会快很多，纯 CPU 也能跑，只是慢。

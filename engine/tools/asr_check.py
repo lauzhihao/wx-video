@@ -19,14 +19,25 @@ import soundfile as sf
 
 from tts import speakable
 
+try:
+    from opencc import OpenCC
+    T2S = OpenCC('t2s')
+except ImportError:
+    T2S = None
+
 # Transcript command: must accept <wav> --out <json> --language --model --flat.
 # Leave unset to skip the listen-back check (make.sh treats it as optional).
 WHISPER_CMD = os.environ.get('WX_WHISPER_CMD', '')
 GAP = 1.5
 
 
+def t2s(text):
+    """Traditional -> simplified. Whisper on zh often returns traditional; the copy never is."""
+    return T2S.convert(str(text)) if T2S is not None else str(text)
+
+
 def norm(text):
-    return re.sub(r'[\s\W_]+', '', str(text)).lower()
+    return re.sub(r'[\s\W_]+', '', t2s(text)).lower()
 
 
 def make_marks(wav_lengths):
@@ -137,7 +148,7 @@ def analyse_narration(spec, voice, marks, words):
         expected, source, cache_mismatch, spec_spoken = expected_for_segment(segment, voice_segments[i])
         ratio = difflib.SequenceMatcher(None, norm(expected.replace('-', '')), norm(heard)).ratio()
         caption_ratio = difflib.SequenceMatcher(None, norm(copy.replace('-', '')), norm(heard)).ratio()
-        minus = '负' in heard and '负' not in copy
+        minus = '负' in t2s(heard) and '负' not in t2s(copy)
         ok = ratio >= 0.85 and not minus and not cache_mismatch and not issues
         report.append({'seg': i, 'ok': ok, 'similarity': round(ratio, 3), 'minus': minus,
                        'copy': copy, 'heard': heard, 'expected_spoken': expected,
@@ -155,6 +166,8 @@ def main():
     if not WHISPER_CMD:
         print('SKIP asr_check: set WX_WHISPER_CMD to a Whisper wrapper that writes word timings')
         return
+    if T2S is None:
+        raise SystemExit('繁简归一需要 opencc：.venv/bin/pip install opencc-python-reimplemented')
     run = os.path.abspath(sys.argv[1])
     with open(os.path.join(run, 'voice', 'voice.json'), encoding='utf-8') as stream:
         voice = json.load(stream)
